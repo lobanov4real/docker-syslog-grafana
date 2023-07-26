@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 networks:
   loki:
 services:
@@ -6,7 +6,7 @@ services:
     container_name: loki
     image: grafana/loki:latest
     volumes:
-      - /home/ivan/docker/grafana-loki/loki:/etc/loki:ro
+      - /home/ivan/docker/grafana-loki/loki:/etc/loki
     command: -config.file=/etc/loki/loki-config.yml
     ports:
       - protocol: tcp
@@ -20,7 +20,7 @@ services:
     image: grafana/promtail:latest
     volumes:
       - /var/log:/var/log
-      - /home/ivan/docker/grafana-loki/promtail:/etc/promtail:ro
+      - /home/ivan/docker/grafana-loki/promtail:/etc/promtail
     command: -config.file=/etc/promtail/promtail-config.yml
     ports:
       - protocol: tcp
@@ -52,8 +52,8 @@ services:
     - promtail
     image: balabit/syslog-ng:latest
     volumes:
-    - /home/ivan/docker/grafana-loki/syslog-ng/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
-    - /home/ivan/syslog-ng/logs:/var/log:ro
+    - /home/ivan/docker/grafana-loki/syslog-ng/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf
+    - /home/ivan/syslog-ng/logs:/var/log
     networks:
       - loki
     ports:
