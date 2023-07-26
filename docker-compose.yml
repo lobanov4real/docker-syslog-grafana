@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 networks:
   loki:
 services:
@@ -35,8 +35,9 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
+    user: "$UID:$GID"
     volumes:
-    - /home/ivan/docker/grafana-loki/grafana:/var/lib/grafana:ro
+    - /home/ivan/docker/grafana-loki/grafana:/var/lib/grafana
     ports:
       - protocol: tcp
         published: 3000
