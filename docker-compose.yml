@@ -7,7 +7,7 @@ services:
     image: grafana/loki:latest
     volumes:
       - /home/ivan/docker/grafana-loki/loki:/etc/loki:ro
-    command: -config.file=/etc/loki/loki-config.yml:ro
+    command: -config.file=/etc/loki/loki-config.yml
     ports:
       - protocol: tcp
         published: 3100
@@ -21,7 +21,7 @@ services:
     volumes:
       - /var/log:/var/log
       - /home/ivan/docker/grafana-loki/promtail:/etc/promtail:ro
-    command: -config.file=/etc/promtail/promtail-config.yml:ro
+    command: -config.file=/etc/promtail/promtail-config.yml
     ports:
       - protocol: tcp
         published: 1514
