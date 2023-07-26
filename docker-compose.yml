@@ -1,0 +1,61 @@
+version: '3'
+networks:
+  loki:
+services:
+  loki:
+    container_name: loki
+    image: grafana/loki:latest
+    volumes:
+      - /home/ivan/docker/grafana-loki/loki:/etc/loki
+    ports:
+      - protocol: tcp
+        published: 3100
+        target: 3100
+    restart: always
+    command: -config.file=/etc/loki/loki-config.yml
+    networks:
+      - loki
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log
+      - /home/ivan/docker/grafana-loki/promtail:/etc/promtail
+    ports:
+      - protocol: tcp
+        published: 1514
+        target: 1514
+      - protocol: tcp
+        published: 9080
+        target: 9080
+    restart: always
+    command: -config.file=/etc/promtail/promtail-config.yml
+    networks:
+      - loki
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    user: "1000"
+    volumes:
+    - /home/ivan/docker/grafana-loki/grafana:/var/lib/grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    networks:
+      - loki
+  syslog-ng:
+    command: -edv
+    container_name: syslog-ng
+    depends_on:
+    - promtail
+    image: balabit/syslog-ng:latest
+    networks:
+      - loki
+    ports:
+    - protocol: udp
+      published: 514
+      target: 514
+    restart: always
+    volumes:
+    - /home/ivan/docker/grafana-loki/syslog-ng/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
+    - /home/ivan/syslog-ng/logs:/var/log
