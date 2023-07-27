@@ -52,7 +52,7 @@ services:
     - promtail
     image: balabit/syslog-ng:latest
     volumes:
-    - ./syslog-ng/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
+    - ./syslog-ng/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf
     - /home/ivan/syslog-ng/logs:/var/log
     networks:
       - loki
