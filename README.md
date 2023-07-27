@@ -1,1 +1,1 @@
-# grafana-loki
+# grafana-loki-syslog
