@@ -35,7 +35,7 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
-    user: "1000:1000"
+    user: "0:0"
     volumes:
     - /home/ivan/docker/grafana-loki/grafana:/var/lib/grafana
     ports:
