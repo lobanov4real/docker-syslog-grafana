@@ -37,7 +37,7 @@ services:
     image: grafana/grafana:latest
     user: "0:0"
     volumes:
-    - ./grafana:/var/lib/grafana:ro
+    - ./grafana:/var/lib/grafana
     ports:
       - protocol: tcp
         published: 3000
