@@ -14,6 +14,7 @@ volumes:
     name: syslog-ng
   
 services:
+  
   loki:
     container_name: loki
     image: grafana/loki:latest
@@ -27,6 +28,7 @@ services:
     restart: always
     networks:
       - loki
+  
   promtail:
     container_name: promtail
     image: grafana/promtail:latest
@@ -44,6 +46,7 @@ services:
     restart: always
     networks:
       - loki
+  
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
@@ -57,6 +60,7 @@ services:
     restart: always
     networks:
       - loki
+  
   syslog-ng:
     command: -edv
     container_name: syslog-ng
