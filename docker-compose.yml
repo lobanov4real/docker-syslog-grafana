@@ -1,6 +1,18 @@
 version: '3'
+
 networks:
   loki:
+
+volumes:
+  loki:
+    name: loki
+  promtail:
+    name: promtail
+  grafana:
+    name: grafana
+  syslog-ng:
+    name: syslog-ng
+  
 services:
   loki:
     container_name: loki
