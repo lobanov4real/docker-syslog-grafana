@@ -1,5 +1,5 @@
-# Syslog in Grafana by docker compose
+# Syslog in Grafana
 
-## Stack
+## How it works
 
 Syslog -> Promtail -> Loki -> Grafana
